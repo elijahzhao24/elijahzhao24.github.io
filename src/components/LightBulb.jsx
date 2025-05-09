@@ -41,8 +41,24 @@ export default function LightBulb() {
         }
       },
       onRelease: function () {
-        // Snap back animation
         document.body.classList.toggle('on');
+
+        if (document.body.classList.contains('on')) {
+          gsap.to('.idea-text', {
+            opacity: 0,
+            filter: "blur(6px)",
+            duration: 1,
+            ease: "power2.out"
+          });
+        } else {
+          gsap.to('.idea-text', {
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.6,
+            ease: "power2.in"
+          });
+        }
+        // Snap back animation
         gsap.to(dragRef.current, {
           y: 0,
           x: 0,
@@ -72,12 +88,26 @@ export default function LightBulb() {
   }, []);
 
   return (
-    <div className="light" style={{ position: 'relative' }}>
+    <div className="light" style={{ position: 'relative', height: '100vh' }}>
       <div className="wire"></div>
       <div className="bulb">
         <span></span>
         <span></span>
       </div>
+      <p className="idea-text" style={{ 
+            position: 'absolute',
+            top: '75vh',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            fontSize: '1.2rem',
+            textAlign: 'center',
+            width: 'auto',
+            whiteSpace: 'nowrap',
+            margin: 0,
+            padding: '0 20px'
+          }}>
+            <span className="highlight">Ideas</span> stay dark until the right switch is finally flipped.
+      </p>
       {/* Tuggable string */}
       <svg
         ref={stringRef}
