@@ -91,7 +91,7 @@ export default function LightBulb() {
             x: 0,
             duration: 0.6,
             ease: "power2.inOut",
-            delay: 0.6
+            delay: 0.3
           });
 
           gsap.to(lineRef.current, {
@@ -101,7 +101,7 @@ export default function LightBulb() {
             },
             ease: "power2.inOut",
             duration: 0.6,
-            delay: 0.6
+            delay: 0.3
           });
 
         } else {
@@ -148,7 +148,7 @@ export default function LightBulb() {
             x: 0,
             duration: 0.6,
             ease: "power2.inOut",
-            delay: 0.6
+            delay: 0.3
           });
 
           gsap.to(lineRef.current, {
@@ -158,7 +158,7 @@ export default function LightBulb() {
             },
             ease: "power2.inOut",
             duration: 0.6,
-            delay: 0.6
+            delay: 0.3
           });
         }
       },
