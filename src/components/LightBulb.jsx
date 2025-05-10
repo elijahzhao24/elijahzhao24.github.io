@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import PortfolioContent from './PortfolioContent';
 gsap.registerPlugin(Draggable);
 
 export default function LightBulb() {
@@ -9,6 +10,7 @@ export default function LightBulb() {
   const lineRef = useRef(null);
   const bulbRef = useRef(null);
   const wireRef = useRef(null);
+  const portfolioRef = useRef(null);
 
   useEffect(() => {
     if (!dragRef.current) return;
@@ -70,6 +72,17 @@ export default function LightBulb() {
             ease: "power2.out"
           });
 
+          // Fade in portfolio content
+          gsap.to(portfolioRef.current, {
+            opacity: 1,
+            duration: 1,
+            delay: 0.5,
+            ease: "power2.inOut",
+            onStart: () => {
+              console.log('Starting portfolio fade in');
+            }
+          });
+
           gsap.to(dragRef.current, {
             y: 0,
             x: 0,
@@ -126,6 +139,16 @@ export default function LightBulb() {
             ease: "power2.in"
           });
 
+          // Fade out portfolio content
+          gsap.to(portfolioRef.current, {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.in",
+            onStart: () => {
+              console.log('Starting portfolio fade out');
+            }
+          });
+
           // Snap back animation
           gsap.to(dragRef.current, {
             y: -window.innerHeight * 0.3,
@@ -158,14 +181,33 @@ export default function LightBulb() {
             },
             ease: "power2.inOut",
             duration: 0.6,
-            delay: 0.3
+            delay: 0.3  
           });
         }
       },
     });
 
+    const handleResize = () => {
+      const isOn = document.body.classList.contains('on');
+      // Update the string
+      gsap.to(lineRef.current, {
+        attr: {
+          x2: 20,
+          y2: isOn ? window.innerHeight * 0.1 : window.innerHeight * 0.40
+        },
+        duration: 0
+      });
+      // Update the handle
+      gsap.to(dragRef.current, {
+        x: 0,
+        y: isOn ? -window.innerHeight * 0.3 : 0,
+        duration: 0
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener('resize', updateLine);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -190,6 +232,7 @@ export default function LightBulb() {
           }}>
             <span className="highlight">Ideas</span> stay dark until the right switch is finally flipped.
       </p>
+      <PortfolioContent ref={portfolioRef} />
       {/* Tuggable string */}
       <svg
         ref={stringRef}
