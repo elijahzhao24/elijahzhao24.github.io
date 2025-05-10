@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 gsap.registerPlugin(Draggable);
@@ -7,69 +7,76 @@ export default function LightBulb() {
   const stringRef = useRef(null);
   const dragRef = useRef(null);
   const lineRef = useRef(null);
-  const [handlePosition, setHandlePosition] = useState({ x: 0, y: 0 });
+  const bulbRef = useRef(null);
+  const wireRef = useRef(null);
 
   useEffect(() => {
     if (!dragRef.current) return;
-    
-    const updateLinePosition = () => {
-      if (lineRef.current) {
-        gsap.set(lineRef.current, {
-          attr: {
-            x2: 20 + handlePosition.x,
-            y2: window.innerHeight * 0.40 + handlePosition.y
-          }
-        });
-      }
+
+    const updateLine = (x, y, isOn) => {
+      const baseY = isOn ? window.innerHeight * 0.10 : window.innerHeight * 0.40;
+      gsap.set(lineRef.current, {
+        attr: { x2: 20 + x, y2: baseY + y }
+      });
     };
 
-    window.addEventListener('resize', updateLinePosition);
-    
     Draggable.create(dragRef.current, {
-      type: 'x, y',
-      bounds: { minY: 0, maxY: window.innerHeight * 0.75 }, 
-      inertia: true,
-      onDrag: function() {
-        setHandlePosition({ x: this.x, y: this.y });
-        if (lineRef.current) {
-          gsap.set(lineRef.current, {
-            attr: {
-              x2: 20 + this.x,
-              y2: window.innerHeight * 0.40 + this.y
-            }
-          });
-        }
+      type: 'x,y',
+      bounds: {
+        minY: document.body.classList.contains('on')
+                ? -window.innerHeight * 0.4
+                : 0,
+        maxY: window.innerHeight * 0.75,
       },
-      onRelease: function () {
+      inertia: true,
+
+      onPress() {
+        const isOn = document.body.classList.contains('on');
+        const offsetY = isOn ? window.innerHeight * 0.3 : 0;
+        // immediately position both
+        gsap.set(this.target, { x: this.x, y: this.y - offsetY });
+        updateLine(this.x, this.y, isOn);
+      },
+
+      onDrag() {
+        const isOn = document.body.classList.contains('on');
+        const offsetY = isOn ? window.innerHeight * 0.3 : 0;
+        gsap.set(this.target, { x: this.x, y: this.y - offsetY });
+        updateLine(this.x, this.y, isOn);
+      },
+
+      onRelease() {
         document.body.classList.toggle('on');
 
         if (document.body.classList.contains('on')) {
+          // Animate the lightbulb up
+          gsap.to('.bulb', {
+            y: '-15vh',
+            duration: 1,
+            ease: "power2.inOut"
+          });
+
+          // Animate the wire up
+          gsap.to('.wire', {
+            y: '-15vh',
+            duration: 1,
+            ease: "power2.inOut"
+          });
+          
           gsap.to('.idea-text', {
             opacity: 0,
             filter: "blur(6px)",
             duration: 1,
             ease: "power2.out"
           });
-        } else {
-          gsap.to('.idea-text', {
-            opacity: 1,
-            filter: "blur(0px)",
+
+          gsap.to(dragRef.current, {
+            y: 0,
+            x: 0,
             duration: 0.6,
-            ease: "power2.in"
+            ease: 'elastic.out(1, 0.5)'
           });
-        }
-        // Snap back animation
-        gsap.to(dragRef.current, {
-          y: 0,
-          x: 0,
-          duration: 0.6,
-          ease: 'elastic.out(1, 0.5)',
-          onComplete: () => {
-            setHandlePosition({ x: 0, y: 0 });
-          },
-        });
-        // Animate the line back
-        if (lineRef.current) {
+
           gsap.to(lineRef.current, {
             attr: {
               x2: 20,
@@ -78,19 +85,94 @@ export default function LightBulb() {
             duration: 0.6,
             ease: 'elastic.out(1, 0.5)'
           });
+
+          gsap.to(dragRef.current, {
+            y: -window.innerHeight * 0.3,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.inOut",
+            delay: 0.6
+          });
+
+          gsap.to(lineRef.current, {
+            attr: {
+              x2: 20,
+              y2: window.innerHeight * 0.1
+            },
+            ease: "power2.inOut",
+            duration: 0.6,
+            delay: 0.6
+          });
+
+        } else {
+          // Animate the lightbulb back down
+          gsap.to('.bulb', {
+            y: '0',
+            duration: 1,
+            ease: "power2.inOut"
+          });
+
+          // Animate the wire back down
+          gsap.to('.wire', {
+            y: '0',
+            duration: 1,
+            ease: "power2.inOut"
+          });
+
+          gsap.to('.idea-text', {
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.6,
+            ease: "power2.in"
+          });
+
+          // Snap back animation
+          gsap.to(dragRef.current, {
+            y: -window.innerHeight * 0.3,
+            x: 0,
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.5)'
+          });
+
+          gsap.to(lineRef.current, {
+            attr: {
+              x2: 20,
+              y2: window.innerHeight * 0.1
+            },
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.5)'
+          });
+
+          gsap.to(dragRef.current, {
+            y: 0,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.inOut",
+            delay: 0.6
+          });
+
+          gsap.to(lineRef.current, {
+            attr: {
+              x2: 20,
+              y2: window.innerHeight * 0.40
+            },
+            ease: "power2.inOut",
+            duration: 0.6,
+            delay: 0.6
+          });
         }
       },
     });
 
     return () => {
-      window.removeEventListener('resize', updateLinePosition);
+      window.removeEventListener('resize', updateLine);
     };
   }, []);
 
   return (
     <div className="light" style={{ position: 'relative', height: '100vh' }}>
-      <div className="wire"></div>
-      <div className="bulb">
+      <div className="wire" ref={wireRef}></div>
+      <div className="bulb" ref={bulbRef}>
         <span></span>
         <span></span>
       </div>
@@ -135,7 +217,7 @@ export default function LightBulb() {
       {/* Draggable handle */}
       <div
         ref={dragRef}
-        style={{
+        style={{  
           position: 'absolute',
           left: 'calc(50% + 70px)',
           top: 'calc(40vh - 20px)',
@@ -146,8 +228,7 @@ export default function LightBulb() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          pointerEvents: 'auto',
-          transform: `translate(${handlePosition.x}px, ${handlePosition.y}px)`,
+          pointerEvents: 'auto'
         }}
       >
         <div
