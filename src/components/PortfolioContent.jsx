@@ -33,7 +33,7 @@ const PortfolioContent = forwardRef((props, ref) => (
 
     {/* Headline */}
     <div style={{
-      fontSize: '3.5rem',
+      fontSize: '4.5rem',
       fontWeight: 800,
       color: '#fff',
       lineHeight: 1.1,
@@ -46,7 +46,7 @@ const PortfolioContent = forwardRef((props, ref) => (
     <div style={{
       marginTop: '0.1rem',
       whiteSpace: 'normal',
-      fontSize: '0.7rem',
+      fontSize: '0.7  rem',
       color: '#999',
       wordWrap: 'break-word',
       overflowWrap: 'break-word',

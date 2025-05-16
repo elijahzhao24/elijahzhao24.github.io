@@ -15,10 +15,12 @@ export default function LightBulb() {
   useEffect(() => {
     if (!dragRef.current) return;
 
-    const updateLine = (x, y, isOn) => {
-      const baseY = isOn ? window.innerHeight * 0.10 : window.innerHeight * 0.40;
+    const getOffsetY = () => (document.body.classList.contains('on') ? -window.innerHeight * 0.3 : 0);
+
+    const updateLine = (x, y) => {
+      const offsetY = getOffsetY();
       gsap.set(lineRef.current, {
-        attr: { x2: 20 + x, y2: baseY + y }
+        attr: { x2: 20 + x, y2: window.innerHeight * 0.40 + y + offsetY }
       });
     };
 
@@ -33,18 +35,13 @@ export default function LightBulb() {
       inertia: true,
 
       onPress() {
-        const isOn = document.body.classList.contains('on');
-        const offsetY = isOn ? window.innerHeight * 0.3 : 0;
-        // immediately position both
-        gsap.set(this.target, { x: this.x, y: this.y - offsetY });
-        updateLine(this.x, this.y, isOn);
+        gsap.set(this.target, { x: this.x, y: this.y + getOffsetY() });
+        updateLine(this.x, this.y);
       },
 
       onDrag() {
-        const isOn = document.body.classList.contains('on');
-        const offsetY = isOn ? window.innerHeight * 0.3 : 0;
-        gsap.set(this.target, { x: this.x, y: this.y - offsetY });
-        updateLine(this.x, this.y, isOn);
+        gsap.set(this.target, { x: this.x, y: this.y + getOffsetY() });
+        updateLine(this.x, this.y);
       },
 
       onRelease() {
@@ -59,7 +56,7 @@ export default function LightBulb() {
           });
 
           // Animate the wire up
-          gsap.to('.wire', {
+          gsap.to(wireRef.current, {
             y: '-15vh',
             duration: 1,
             ease: "power2.inOut"
@@ -126,7 +123,7 @@ export default function LightBulb() {
           });
 
           // Animate the wire back down
-          gsap.to('.wire', {
+          gsap.to(wireRef.current, {
             y: '0',
             duration: 1,
             ease: "power2.inOut"
@@ -188,21 +185,11 @@ export default function LightBulb() {
     });
 
     const handleResize = () => {
-      const isOn = document.body.classList.contains('on');
-      // Update the string
-      gsap.to(lineRef.current, {
-        attr: {
-          x2: 20,
-          y2: isOn ? window.innerHeight * 0.1 : window.innerHeight * 0.40
-        },
-        duration: 0
-      });
-      // Update the handle
-      gsap.to(dragRef.current, {
-        x: 0,
-        y: isOn ? -window.innerHeight * 0.3 : 0,
-        duration: 0
-      });
+      // Get the current x and y of the handle (from GSAP)
+      const x = gsap.getProperty(dragRef.current, "x") || 0;
+      const y = gsap.getProperty(dragRef.current, "y") || 0;
+      // Update the string to match the handle's position and offset
+      updateLine(x, y);
     };
 
     window.addEventListener('resize', handleResize);
