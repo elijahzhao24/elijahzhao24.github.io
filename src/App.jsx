@@ -10,6 +10,8 @@ export default function App() {
       if (!isOn) {
         document.body.style.overflow = 'hidden';
         window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
       } else {
         document.body.style.overflow = 'auto';
       }
@@ -19,7 +21,12 @@ export default function App() {
     const observer = new MutationObserver(handleLightChange);
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    return () => observer.disconnect();
+    window.addEventListener('load', handleLightChange);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('load', handleLightChange);
+    };
   }, []);
 
   return (

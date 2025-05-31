@@ -124,8 +124,8 @@ body {
 }
 
 .AboutMe-text {
-  font-size: 1.0rem;
-  color: #aaa; 
+  font-size: clamp(0.6rem, 1.2rem, 5vw);
+  color: #ccc; 
   letter-spacing: 0.5px;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.05);
   max-width: 600px;
