@@ -14,7 +14,7 @@ const PortfolioContent = forwardRef((props, ref) => (
       zIndex: 10,
       width: '80vw',
       maxWidth: '1000px',
-      padding: '0 20px',
+      padding: '3px 10px 0px',
       pointerEvents: 'none',
     }}
   >
@@ -33,7 +33,7 @@ const PortfolioContent = forwardRef((props, ref) => (
 
     {/* Headline */}
     <div style={{
-      fontSize: '4.5rem',
+      fontSize: "clamp(1.5rem, 4.5rem, 7vw)",
       fontWeight: 800,
       color: '#fff',
       lineHeight: 1.1,

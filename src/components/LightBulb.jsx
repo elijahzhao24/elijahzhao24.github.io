@@ -188,8 +188,23 @@ export default function LightBulb() {
       // Get the current x and y of the handle (from GSAP)
       const x = gsap.getProperty(dragRef.current, "x") || 0;
       const y = gsap.getProperty(dragRef.current, "y") || 0;
+      
       // Update the string to match the handle's position and offset
-      updateLine(x, y);
+      const isOn = document.body.classList.contains('on');
+      const baseY = isOn ? window.innerHeight * 0.10 : window.innerHeight * 0.40;
+      
+      // Update handle position
+      gsap.set(dragRef.current, {
+        y: isOn ? -window.innerHeight * 0.3 : 0
+      });
+
+      // Update line position
+      gsap.set(lineRef.current, {
+        attr: { 
+          x2: 20 + x, 
+          y2: baseY
+        }
+      });
     };
 
     window.addEventListener('resize', handleResize);
