@@ -22,10 +22,27 @@ export default function App() {
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
     window.addEventListener('load', handleLightChange);
+    
+    // Handle visibility change (when tab becomes visible again)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        handleLightChange();
+      }
+    });
+
+    // Handle scroll events when light is off
+    const handleScroll = () => {
+      if (!document.body.classList.contains('on')) {
+        handleLightChange();
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       observer.disconnect();
       window.removeEventListener('load', handleLightChange);
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('visibilitychange', handleLightChange);
     };
   }, []);
 
