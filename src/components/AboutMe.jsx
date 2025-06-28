@@ -45,7 +45,7 @@ export default function AboutMe() {
       minHeight: '50vh',
       padding: '0',
       marginTop: 'auto',
-      opacity: 0  // Start with opacity 0
+      opacity: 0 
     }}>
       <div className="max-w-full mx-auto px-6 py-8">
         <h1 className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">

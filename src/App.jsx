@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import LightBulb from './components/LightBulb';
 import PortfolioContent from './components/PortfolioContent';
 import AboutMe from './components/AboutMe';
+import CurrentTech from './components/CurrentTech';
 
 export default function App() {
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function App() {
       <LightBulb />
       <PortfolioContent />
       <AboutMe />
+      <CurrentTech />
     </div>
   );
 } 

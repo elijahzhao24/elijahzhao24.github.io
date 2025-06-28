@@ -144,3 +144,10 @@ body {
 .fluid-space-y > :not([hidden]) ~ :not([hidden]) {
   margin-top: clamp(0.5rem, 3vw, 2.5rem);
 }
+
+
+.CurrentTech {
+  align-items: left;
+  padding: 1rem;
+  width: 100%;
+}
