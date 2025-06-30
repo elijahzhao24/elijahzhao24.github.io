@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 body {
-  background: #181818 !important;
+  background: #171717 !important;
 }
 
 .on {
-  background: radial-gradient(circle at 50% 40vh, #272727, #111) !important;
+  background: radial-gradient(circle at 50% 40vh, #272727, #080808) !important;
 }
 
-.light {
+.light {  
   min-height: 100vh;
   display: flex;
   align-items: center;

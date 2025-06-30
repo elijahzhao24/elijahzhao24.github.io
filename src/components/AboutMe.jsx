@@ -26,7 +26,7 @@ export default function AboutMe() {
         scrollTrigger: {
           trigger: aboutElement,
           start: "top 70%",
-          end: "top 50%",
+          end: "top 30%",
           toggleActions: "play none none reverse"
         }
       }

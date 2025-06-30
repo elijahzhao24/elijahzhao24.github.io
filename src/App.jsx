@@ -3,6 +3,8 @@ import LightBulb from './components/LightBulb';
 import PortfolioContent from './components/PortfolioContent';
 import AboutMe from './components/AboutMe';
 import CurrentTech from './components/CurrentTech';
+import Experience from './components/Experience';
+
 
 export default function App() {
   useEffect(() => {
@@ -53,6 +55,7 @@ export default function App() {
       <PortfolioContent />
       <AboutMe />
       <CurrentTech />
+      <Experience />
     </div>
   );
 } 
