@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiLinkedin, FiGithub, FiMail, FiDownload} from 'react-icons/fi';
+import mailLogo from '../assets/mail.svg';
 import { HiOutlineArrowDownTray  } from 'react-icons/hi2';
 import profilePic from '../assets/profile.png';
 
@@ -83,10 +84,11 @@ export default function AboutMe() {
                     className="text-[#bbbbbb] hover:text-white transition-colors"/>
                 </button>
                 <button onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}>
-                  <FiMail 
+                  { <FiMail 
                     size={'clamp(20, 35, 35)'}
-                    className="text-[#bbbbbb] hover:text-white transition-colors"/>
+                    className="text-[#bbbbbb] hover:text-white transition-colors"/> }
                 </button> 
+                
               
             </div>
           </div>
