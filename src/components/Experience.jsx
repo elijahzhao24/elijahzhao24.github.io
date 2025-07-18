@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import UBCLogo from '../assets/UBClogo.png'
+import WoohelpLogo from '../assets/WoohelpLogo.png'
 import ExperienceItem from './ExperienceItem';
+
 
 
 const Experience = () => {
@@ -27,37 +29,54 @@ const Experience = () => {
         {activeTab === 'work' && <WorkPanel />}
         {activeTab === 'education' && <EducationPanel />}
       </div>
+      <div className="pt-8">
+        hi
+      </div>
     </div>
   );
 };
 
 function WorkPanel() {
   return (
-    <div className='text-white text-xl font-semibold'>
-
-      <h2>Woohelps</h2>
-      <p>second work</p>
+    <div className="relative border rounded-md border-[#333333] p-2">
+      {/* Vertical line */}
+      <div
+        className="absolute top-0 bottom-0 left-[6vw] lg:left-[32px] md:left-[32px] sm:left-[5vw]"
+        style={{
+          width: '1.5px',
+          background: '#333333',
+          zIndex: 0,
+        }}
+      />
+      <div className="text-white text-xl font-semibold relative z-10">
+        <ExperienceItem
+          image={WoohelpLogo}
+          name="Woohelps International Technology LTD"
+          date="May 2024 - Aug 2024"
+          position="Software Development Engineering Intern"
+          description={[
+            "Developed a full‑stack platform enabling users to seamlessly post, search, and browse apartment listings.",
+            "Built using React.js on the front end, Node.js/Express on the back end, and MySQL for robust data management.",
+            "Built an automated image upload and optimization pipeline with AWS S3 and integrating WeChat’s API for secure user authentication and real‑time notifications."
+          ]}
+        />
+      </div>
     </div>
   );
 }
 
 function EducationPanel() {
   return (
-    <div className='text-white text-xl font-semibold'>
-      <ExperienceItem
-        image={UBCLogo}
-        name="UBC"
-        date="sep 2024 - present"
-        position="BSc computer science"
-        description="bacherlor in computer science"
-      />
-      <ExperienceItem
-        image={UBCLogo}
-        name="UBC"
-        date="sep 2024 - present"
-        position="BSc computer science"
-        description="bacherlor in computer science"
-      />
+    <div className=' border rounded-md border-[#333333] p-2'>
+      <div className='text-white text-xl font-semibold'>
+        <ExperienceItem
+          image={UBCLogo}
+          name="University of British Columbia"
+          date="Sep 2024 - present"
+          position="B.Sc. Computer Science; Minor in Mathematics (4.0 GPA)"
+          description={["Related Coursework: Relational Databases (CPSC 304), DSA (CPSC 221), Computer Systems (CPSC 213), Software Construction and Design (CPSC 310)"]}
+        />
+      </div>
     </div>
   );
 }
