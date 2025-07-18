@@ -1,45 +1,29 @@
 import React, { useState } from 'react';
+import UBCLogo from '../assets/UBClogo.png'
+import ExperienceItem from './ExperienceItem';
+
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState('work');
   return (
-    <div style={{ 
-      padding: '0vh',
-      marginTop: '10vh',
-    }}>
-      <div style={{ display: 'flex', borderBottom: '2px solid #eee', marginBottom: '1rem' }}>
+    <div className='w-full flex flex-col items-center justify-center mt-[10vh]'>
+      <div className="flex bg-[#242730] rounded-lg p-1 max-w-full  border-[#2d3644] lg:w-[700px] md:w-[700px] w-[80vw]">
         <button
-          onClick={() => setActiveTab('work')} className='text-white text-xl font-semibold'
-          style={{
-            flex: 1,
-            padding: '0.5rem',
-            background: 'none',
-            border: 'none',
-            borderBottom: activeTab === 'work' ? '2px solid #333' : '2px solid transparent',
-            fontWeight: activeTab === 'work' ? 'bold' : 'normal',
-            cursor: 'pointer'
-          }}
+          onClick={() => setActiveTab('work')}
+          className={`flex-1 py-0.5 rounded-md transition-colors duration-200 text-md font-semibold 
+              ${activeTab === 'work' ? 'bg-[#111111] text-[#f2f2f2] shadow' : 'bg-transparent text-gray-400 hover:text-[#f2f2f2]'}`}
         >
           Work
         </button>
         <button
           onClick={() => setActiveTab('education')}
-          className='text-white text-xl font-semibold'
-          style={{
-            flex: 1,
-            padding: '0.5rem',
-            background: 'none',
-            border: 'none',
-            borderBottom: activeTab === 'education' ? '2px solid #333' : '2px solid transparent',
-            fontWeight: activeTab === 'education' ? 'bold' : 'normal',
-            cursor: 'pointer'
-          }}
+          className={`flex-1 py-0.5 rounded-md transition-colors duration-200 text-md font-semibold 
+            ${activeTab === 'education' ? 'bg-[#111111] text-[#f2f2f2] shadow' : 'bg-transparent text-gray-400 hover:text-[#f2f2f2]'}`}
         >
           Education
         </button>
       </div>
-
-      <div>
+      <div style={{ marginTop: '1rem' }}>
         {activeTab === 'work' && <WorkPanel />}
         {activeTab === 'education' && <EducationPanel />}
       </div>
@@ -60,8 +44,20 @@ function WorkPanel() {
 function EducationPanel() {
   return (
     <div className='text-white text-xl font-semibold'>
-      <h2>University of British Columbia, BSc Computer Science</h2>
-      <p>more</p>
+      <ExperienceItem
+        image={UBCLogo}
+        name="UBC"
+        date="sep 2024 - present"
+        position="BSc computer science"
+        description="bacherlor in computer science"
+      />
+      <ExperienceItem
+        image={UBCLogo}
+        name="UBC"
+        date="sep 2024 - present"
+        position="BSc computer science"
+        description="bacherlor in computer science"
+      />
     </div>
   );
 }
