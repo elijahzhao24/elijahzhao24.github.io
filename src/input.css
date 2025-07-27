@@ -7,7 +7,7 @@ body {
 }
 
 .on {
-  background: radial-gradient(circle at 50% 40vh, #272727, #080808) !important;
+  background: radial-gradient(circle at 100% 40vh, #272727, #080808) !important;
 }
 
 .light {  
@@ -147,6 +147,12 @@ body {
 
 
 .CurrentTech {
+  align-items: left;
+  padding: 1rem;
+  width: 100%;
+}
+
+.Projects {
   align-items: left;
   padding: 1rem;
   width: 100%;

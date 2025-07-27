@@ -10,7 +10,7 @@ import React from 'react';
  */
 const ExperienceItem = ({ image, name, date, position, description }) => {
   return (
-    <div className="flex items-start gap-4 mb-10 lg:w-[680px] md:w-[680px] w-[78vw]">
+    <div className="flex items-start gap-4 mb-10 lg:w-[880px] md:w-[680px] w-[78vw]">
       {/* Timeline dot and line */}
       <div className="flex flex-col items-center">
         <div className="w-12 h-12 rounded-full bg-[#10131a] flex items-center justify-center border-2 border-[#232a36] overflow-hidden">

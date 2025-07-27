@@ -9,7 +9,7 @@ const Experience = () => {
   const [activeTab, setActiveTab] = useState('work');
   return (
     <div className='w-full flex flex-col items-center justify-center mt-[10vh]'>
-      <div className="flex bg-[#242730] rounded-lg p-1 max-w-full  border-[#2d3644] lg:w-[700px] md:w-[700px] w-[80vw]">
+      <div className="flex bg-[#242730] rounded-lg p-1 max-w-full  border-[#2d3644] lg:w-[900px] md:w-[700px] w-[80vw]">
         <button
           onClick={() => setActiveTab('work')}
           className={`flex-1 py-0.5 rounded-md transition-colors duration-200 text-md font-semibold 
@@ -29,16 +29,13 @@ const Experience = () => {
         {activeTab === 'work' && <WorkPanel />}
         {activeTab === 'education' && <EducationPanel />}
       </div>
-      <div className="pt-8">
-        hi
-      </div>
     </div>
   );
 };
 
 function WorkPanel() {
   return (
-    <div className="relative border rounded-md border-[#333333] p-2">
+    <div className="relative border rounded-md border-[#333333] pt-2 pl-2 pr-2">
       {/* Vertical line */}
       <div
         className="absolute top-0 bottom-0 left-[6vw] lg:left-[32px] md:left-[32px] sm:left-[5vw]"
@@ -67,7 +64,7 @@ function WorkPanel() {
 
 function EducationPanel() {
   return (
-    <div className=' border rounded-md border-[#333333] p-2'>
+    <div className=' border rounded-md border-[#333333] pt-2 pl-2 pr-2'>
       <div className='text-white text-xl font-semibold'>
         <ExperienceItem
           image={UBCLogo}

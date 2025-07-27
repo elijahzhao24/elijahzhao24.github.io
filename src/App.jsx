@@ -4,6 +4,8 @@ import PortfolioContent from './components/PortfolioContent';
 import AboutMe from './components/AboutMe';
 import CurrentTech from './components/CurrentTech';
 import Experience from './components/Experience';
+import Projects from './components/projects';
+import Footer from './components/Footer';
 
 
 export default function App() {
@@ -56,6 +58,8 @@ export default function App() {
       <AboutMe />
       <CurrentTech />
       <Experience />
+      <Projects />
+      <Footer />
     </div>
   );
 } 
