@@ -55,6 +55,7 @@ export const BackgroundBeams = ({ className }) => {
     'M-44 -573C-44 -573 24 -168 488 -41C952 86 1020 491 1020 491',
     'M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483'
   ];
+  
 
   return (
     <div
@@ -85,13 +86,13 @@ export const BackgroundBeams = ({ className }) => {
             stroke={`url(#linearGradient-${index})`}
             strokeOpacity="0.4"
             strokeWidth="0.5"
-            animate={index % 2 === 0 ? {
+            animate={true ? {
               x1: ['0%', '100%'],
               x2: ['0%', '95%'],
               y1: ['0%', '100%'],
               y2: ['0%', `${93 + Math.random() * 8}%`]
             } : {}}
-            transition={index % 2 === 0 ? {
+            transition={true ? {
               duration: Math.random() * 10 + 10,
               ease: 'easeInOut',
               repeat: Infinity,

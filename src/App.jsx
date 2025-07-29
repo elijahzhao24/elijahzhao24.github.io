@@ -4,8 +4,11 @@ import PortfolioContent from './components/PortfolioContent';
 import AboutMe from './components/AboutMe';
 import CurrentTech from './components/CurrentTech';
 import Experience from './components/Experience';
-import Projects from './components/projects';
+import Projects from './components/Projects';
 import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProjectsPage from './components/ProjectsPage';
+import HomePage from './components/HomePage';
 
 
 export default function App() {
@@ -52,14 +55,11 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <LightBulb />
-      <PortfolioContent />
-      <AboutMe />
-      <CurrentTech />
-      <Experience />
-      <Projects />
-      <Footer />
-    </div>
+    <BrowserRouter basename="/portfolio/">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 } 

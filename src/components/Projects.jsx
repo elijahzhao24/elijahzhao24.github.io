@@ -2,9 +2,10 @@ import React from "react";
 import ProjectWidget from "./ProjectWidget";
 import Portdemo from '../assets/portdemo.png';
 import Connectfourdemo from '../assets/connectfourdemo.png';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Projects() {
+  const navigate = useNavigate();
   const featuredProjects = [
     {
       title: "Portfolio Website",
@@ -24,7 +25,7 @@ export default function Projects() {
   ];
 
   const handleViewMore = () => {
-    console.log("View more clicked");
+    navigate('/projects');
   };
 
   return (
@@ -43,15 +44,12 @@ export default function Projects() {
             Featured Projects
           </h1>
           <button
-               onClick={handleViewMore}
-               target="hey"
-               rel="noopener noreferrer"
-               className="text-[#cccccc] hover:text-[#ffffff] transition-colors duration-200"
-             >
-                View More
+            onClick={handleViewMore}
+            className="text-[#cccccc] hover:text-[#ffffff] transition-colors duration-200"
+          >
+            View More
           </button>
         </div>
-        
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {featuredProjects.map((project, index) => (

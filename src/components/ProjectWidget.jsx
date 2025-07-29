@@ -19,7 +19,7 @@ export default function ProjectWidget({
             <img 
               src={image} 
               alt={title}
-              className="rounded-lg object-cover max-h-56 w-full bg-[#111111]   border-[#232b3e]"
+              className={`rounded-lg max-h-56 w-full bg-[#111111] border-[#232b3e] ${typeof image === 'string' && image.endsWith('.gif') ? '' : 'object-cover'}`}
               style={{ boxShadow: '0 2px 16px 0 rgba(75, 75, 75, 0.1)' }}
             />
           </div>
