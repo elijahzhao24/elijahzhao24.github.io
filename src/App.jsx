@@ -10,7 +10,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProjectsPage from './components/ProjectsPage';
 import HomePage from './components/HomePage';
 
-
 export default function App() {
   useEffect(() => {
     const handleLightChange = () => {

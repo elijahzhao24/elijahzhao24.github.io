@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiLinkedin, FiGithub, FiMail, FiDownload} from 'react-icons/fi';
 import mailLogo from '../assets/mail.svg';
+import profile from '../assets/demo3.png';
 import { HiOutlineArrowDownTray  } from 'react-icons/hi2';
 import profilePic from '../assets/profile.png';
 
@@ -10,29 +11,68 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutMe() {
   const aboutRef = useRef(null);
+  const headingRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
-    const aboutElement = aboutRef.current;
-    
-    gsap.fromTo(aboutElement,
-      {
-        opacity: 0,
-        y: 60
-      },
+    // Animate the heading
+    gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: 50 },
       {
         opacity: 1,
         y: 0,
         duration: 1,
-        ease: "power2.out",
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: aboutElement,
-          start: "top 70%",
-          end: "top 30%",
-          toggleActions: "play none none reverse"
-        }
+          trigger: headingRef.current,
+          start: 'top 77%',
+          end: 'top 60%',
+          toggleActions: 'play none none reverse',
+        },
       }
     );
 
+    // Animate the content (text and buttons)
+    gsap.fromTo(
+      contentRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 77%',
+          end: 'top 60%',
+          toggleActions: 'play none none reverse',
+        },
+        delay: 0.2
+      }
+    );
+
+    // Animate the profile image
+    gsap.fromTo(
+      imageRef.current,
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: imageRef.current,
+          start: 'top 77%',
+          end: 'top 60%',
+          toggleActions: 'play none none reverse',
+        },
+        delay: 0.4
+      }
+    );
+
+    ScrollTrigger.refresh();
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -45,22 +85,23 @@ export default function AboutMe() {
       alignItems: 'center', 
       minHeight: '50vh',
       padding: '0',
-      marginTop: 'auto',
-      opacity: 0 
+      marginTop: 'auto'
     }}>
       <div className="max-w-full mx-auto px-6 py-8">
-        <h1 className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
+        <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
         </h1>
         <div className="flex items-center">
-          <div className="fluid-space-y">
+          <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y">
+            <div className="space-y-5">
             <p className="AboutMe-text">
-              18-year-old developer and student from Vancouver 🇨🇦 
+            I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
             </p>
             <p className="AboutMe-text">
-              I like to develop apps and websites, fuel up on IKEA plants, and occasionally shoot under 100 on the golf course.
+            I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
             </p>
+            </div>
             <div className="flex items-center justify-start w-full ml-auto fluid-gap">
               <a
                 href="/portfolio/Elijah_Zhao_Resume.pdf"
@@ -92,9 +133,9 @@ export default function AboutMe() {
               
             </div>
           </div>
-          <div className="aspect-square w-[clamp(150px,250px,20vw)] object-cover border-4 shadow-lg ml-8 overflow-hidden">
+          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(150px,250px,20vw)] object-cover shadow-lg ml-8 overflow-hidden">
             <img
-              src={profilePic}
+              src={profile}
               alt="Profile"
               className="w-full h-full object-cover"
             />

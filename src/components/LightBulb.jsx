@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import PortfolioContent from './PortfolioContent';
+import { useLocation } from 'react-router-dom';
 gsap.registerPlugin(Draggable);
 
 export default function LightBulb() {
@@ -11,6 +12,28 @@ export default function LightBulb() {
   const bulbRef = useRef(null);
   const wireRef = useRef(null);
   const portfolioRef = useRef(null);
+  const location = useLocation();
+
+  // Simple fix: ensure light is on when navigating to homepage from other pages
+  useEffect(() => {
+    // Only run this when navigating to homepage (not on initial load)
+    if (location.pathname === '/') {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        // If body has 'on' class, ensure all elements are positioned correctly
+        if (document.body.classList.contains('on')) {
+          gsap.set('.bulb', { y: '-15vh' });
+          gsap.set(wireRef.current, { y: '-15vh' });
+          gsap.set('.idea-text', { opacity: 0, filter: "blur(6px)" });
+          gsap.set(portfolioRef.current, { opacity: 1 });
+          gsap.set(dragRef.current, { y: -window.innerHeight * 0.3, x: 0 });
+          gsap.set(lineRef.current, {
+            attr: { x2: 20, y2: window.innerHeight * 0.1 }
+          });
+        }
+      }, 100);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!dragRef.current) return;

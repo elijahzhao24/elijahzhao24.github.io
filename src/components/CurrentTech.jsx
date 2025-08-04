@@ -44,9 +44,9 @@ export default function CurrentTech() {
         stagger: 0.15,
         scrollTrigger: {
           trigger: headingRef.current,
-          start: 'top 80%',
+          start: 'top 90%',
           end: 'top 60%',
-          toggleActions: 'play none none reverse',
+          toggleActions: 'play resume resume reverse',
         },
       }
     );
@@ -62,7 +62,7 @@ export default function CurrentTech() {
         stagger: 0.15,
         scrollTrigger: {
           trigger: widgetsRef.current[0]?.parentNode,
-          start: 'top 80%',
+          start: 'top 90%',
           end: 'top 60%',
           toggleActions: 'play none none reverse',
         },

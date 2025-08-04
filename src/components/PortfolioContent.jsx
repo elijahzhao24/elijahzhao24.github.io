@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 
 const PortfolioContent = forwardRef((props, ref) => (
   <div

@@ -1,8 +1,7 @@
 export const mainNavigationLinks = [
   { label: "Home", url: "#home" },
-  { label: "Work", url: "#work" },
   { label: "About", url: "#about" },
-  { label: "Contact", url: "#contact" },
+  { label: "Projects", url: "#projects" },
 ];
 
 export const portfolioProjects = [
