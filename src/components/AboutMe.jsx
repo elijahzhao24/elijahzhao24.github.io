@@ -79,14 +79,14 @@ export default function AboutMe() {
   }, []);
 
   return (
-    <div ref={aboutRef} className="AboutMe" style={{ 
+    <div ref={aboutRef} className="AboutMe px-8" style={{ 
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'center', 
       minHeight: '50vh',
       padding: '0',
     }}>
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-9 py-8">
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
