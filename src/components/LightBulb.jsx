@@ -243,7 +243,7 @@ export default function LightBulb() {
         <span></span>
         <span></span>
       </div>
-        <p className="idea-text absolute top-[75vh] left-1/2 transform -translate-x-1/2 text-center w-auto whitespace-nowrap m-0 px-5 text-lg sm:text-base">
+        <p className="idea-text absolute top-[75vh] left-1/2 transform -translate-x-1/2 text-center w-auto whitespace-nowrap m-0 px-5 md:text-xl" >
           <span className="highlight">Ideas</span> stay dark until the right switch is finally flipped.
         </p>
       <PortfolioContent ref={portfolioRef} />

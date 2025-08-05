@@ -85,22 +85,21 @@ export default function AboutMe() {
       alignItems: 'center', 
       minHeight: '50vh',
       padding: '0',
-      marginTop: 'auto'
     }}>
       <div className="max-w-6xl mx-auto px-6 py-8">
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
         </h1>
-        <div className="flex items-start justify-start">
+        <div className="flex items-center justify-start">
           <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y">
-            <div className="space-y-5">
-            <p className="AboutMe-text">
-            I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
-            </p>
-            <p className="AboutMe-text">
-            I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
-            </p>
+            <div className="space-y-5 ">
+              <p className="AboutMe-text">
+                I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
+              </p>
+              <p className="AboutMe-text">
+                I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
+              </p>
             </div>
                 <div className="flex items-center justify-start w-full ml-auto gap-6">
                                                                                                                                                        <a
