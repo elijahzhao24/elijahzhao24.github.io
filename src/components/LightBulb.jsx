@@ -243,20 +243,9 @@ export default function LightBulb() {
         <span></span>
         <span></span>
       </div>
-      <p className="idea-text" style={{ 
-            position: 'absolute',
-            top: '75vh',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            fontSize: '1.2rem',
-            textAlign: 'center',
-            width: 'auto',
-            whiteSpace: 'nowrap',
-            margin: 0,
-            padding: '0 20px'
-          }}>
-            <span className="highlight">Ideas</span> stay dark until the right switch is finally flipped.
-      </p>
+        <p className="idea-text absolute top-[75vh] left-1/2 transform -translate-x-1/2 text-center w-auto whitespace-nowrap m-0 px-5 text-lg sm:text-base">
+          <span className="highlight">Ideas</span> stay dark until the right switch is finally flipped.
+        </p>
       <PortfolioContent ref={portfolioRef} />
       {/* Tuggable string */}
       <svg

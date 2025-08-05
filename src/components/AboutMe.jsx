@@ -85,9 +85,11 @@ export default function AboutMe() {
       alignItems: 'center', 
       minHeight: '50vh',
       padding: '0',
-      marginTop: 'auto'
+      marginTop: 'auto',
+      maxWidth: '100vw',
+      overflow: 'hidden'
     }}>
-      <div className="max-w-full mx-auto px-6 py-8">
+              <div className="max-w-full mx-auto px-6 py-8" style={{ maxWidth: '100vw', overflow: 'hidden' }}>
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
@@ -103,31 +105,28 @@ export default function AboutMe() {
             </p>
             </div>
             <div className="flex items-center justify-start w-full ml-auto fluid-gap">
-              <a
-                href="/portfolio/Elijah_Zhao_Resume.pdf"
-                download
-                className="flex items-center gap-2 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
-              >
-                <span className="font-medium">Resume</span>
-                <HiOutlineArrowDownTray size={'clamp(20, 30, 30)'} />
-              </a>
-              <button
+                             <a
+                 href="/portfolio/Elijah_Zhao_Resume.pdf"
+                 download
+                 className="flex items-center gap-2 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
+               >
+                 <span className="font-medium">Resume</span>
+                 <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+               </a>
+                <button
                   onClick={() => window.open('https://www.linkedin.com/in/elijahzhao24/')}
                 >
                   <FiLinkedin
-                    size={'clamp(20, 35, 35)'}
-                    className="text-[#bbbbbb] hover:text-white transition-colors"
+                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
                   />
                 </button>
                 <button onClick={() => window.open('https://github.com/elijahzhao24')}>
                   <FiGithub 
-                    size={'clamp(20, 35, 35)'}
-                    className="text-[#bbbbbb] hover:text-white transition-colors"/>
+                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
                 </button>
                 <button onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}>
                   { <FiMail 
-                    size={'clamp(20, 35, 35)'}
-                    className="text-[#bbbbbb] hover:text-white transition-colors"/> }
+                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
                 </button> 
                 
               

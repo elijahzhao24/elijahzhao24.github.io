@@ -10,6 +10,7 @@ export const portfolioProjects = [
 ];
 
 export const socialLinks = [
-  { label: "LinkedIn", url: "https://linkedin.com/in/elijah-zhao" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/elijahzhao24"},
   { label: "Github", url: "https://github.com/elijahzhao24" },
+  { label: "Instagram", url: "https://www.instagram.com/elijahzhao.24/" },
 ]; 
