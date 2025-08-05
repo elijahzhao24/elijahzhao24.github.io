@@ -102,30 +102,37 @@ export default function AboutMe() {
             I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
             </p>
             </div>
-            <div className="flex items-center justify-start w-full ml-auto fluid-gap">
-                             <a
-                 href="/portfolio/Elijah_Zhao_Resume.pdf"
-                 download
-                 className="flex items-center gap-2 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
-               >
-                 <span className="font-medium">Resume</span>
-                 <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-               </a>
-                <button
-                  onClick={() => window.open('https://www.linkedin.com/in/elijahzhao24/')}
-                >
-                  <FiLinkedin
-                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
-                  />
-                </button>
-                <button onClick={() => window.open('https://github.com/elijahzhao24')}>
-                  <FiGithub 
-                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
-                </button>
-                <button onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}>
-                  { <FiMail 
-                    className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
-                </button> 
+                <div className="flex items-center justify-start w-full ml-auto gap-6">
+                                                                                                                                                       <a
+                     href="/portfolio/Elijah_Zhao_Resume.pdf"
+                     download
+                     className="flex items-center gap-0 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
+                   >
+                  <span className="font-medium">Resume</span>
+                     <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 -ml-2" />
+                  </a>
+                 <button
+                   onClick={() => window.open('https://www.linkedin.com/in/elijahzhao24/')}
+                   className="p-2"
+                 >
+                   <FiLinkedin
+                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
+                   />
+                 </button>
+                 <button 
+                   onClick={() => window.open('https://github.com/elijahzhao24')}
+                   className="p-2"
+                 >
+                   <FiGithub 
+                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
+                 </button>
+                 <button 
+                   onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}
+                   className="p-2"
+                 >
+                   { <FiMail 
+                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
+                 </button>  
                 
               
             </div>
