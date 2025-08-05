@@ -27,8 +27,8 @@ export default function AboutMe() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: headingRef.current,
-          start: 'top 77%',
-          end: 'top 60%',
+          start: 'top 80%',
+          end: 'top 73%',
           toggleActions: 'play none none reverse',
         },
       }
@@ -45,8 +45,8 @@ export default function AboutMe() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: contentRef.current,
-          start: 'top 77%',
-          end: 'top 60%',
+          start: 'top 80%',
+          end: 'top 73%',
           toggleActions: 'play none none reverse',
         },
         delay: 0.2
@@ -64,8 +64,8 @@ export default function AboutMe() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: imageRef.current,
-          start: 'top 77%',
-          end: 'top 60%',
+          start: 'top 80%',
+          end: 'top 73%',
           toggleActions: 'play none none reverse',
         },
         delay: 0.4
@@ -79,13 +79,11 @@ export default function AboutMe() {
   }, []);
 
   return (
-    <div ref={aboutRef} className="AboutMe px-8" style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      minHeight: '50vh',
-      padding: '0',
-    }}>
+    <div ref={aboutRef} className="AboutMe
+       flex justify-center items-center
+       min-h-[50vh]
+       px-4 sm:px-6 md:px-8" 
+    >
       <div className="max-w-6xl mx-auto px-9 py-8">
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
@@ -136,7 +134,7 @@ export default function AboutMe() {
               
             </div>
           </div>
-          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(150px,250px,20vw)] object-cover shadow-lg ml-8 overflow-hidden">
+          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(150px,250px,20vw)] shadow-lg ml-8 overflow-hidden">
             <img
               src={profile}
               alt="Profile"
