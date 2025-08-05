@@ -85,16 +85,14 @@ export default function AboutMe() {
       alignItems: 'center', 
       minHeight: '50vh',
       padding: '0',
-      marginTop: 'auto',
-      maxWidth: '100vw',
-      overflow: 'hidden'
+      marginTop: 'auto'
     }}>
-              <div className="max-w-full mx-auto px-6 py-8" style={{ maxWidth: '100vw', overflow: 'hidden' }}>
+      <div className="max-w-6xl mx-auto px-6 py-8">
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
         </h1>
-        <div className="flex items-center">
+        <div className="flex items-start justify-start">
           <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y">
             <div className="space-y-5">
             <p className="AboutMe-text">
