@@ -83,14 +83,14 @@ export default function AboutMe() {
        w-full flex justify-center items-center
        min-h-[50vh]" 
     >
-      <div className="mx-auto lg:w-[1000px] md:w-[800px] w-[95vw] px-4 sm:px-6 md:px-8">
-        <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
-          hi elijah here
-          <span className="text-yellow-400 text-5xl">👋</span>
-        </h1>
-        <div className="flex items-center justify-start">
-          <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y">
-            <div className="space-y-5 ">
+       <div className="mx-auto w-[95vw] lg:w-[69vw] md:w-[80vw] px-4 sm:px-6 md:px-8">
+          <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
+            hi elijah here
+            <span className="text-yellow-400 text-5xl">👋</span>
+          </h1>
+            <div className="flex items-start gap-4 md:gap-6 lg:gap-8">
+               <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y flex-1">
+            <div className="space-y-5">
               <p className="AboutMe-text">
                 I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
               </p>
@@ -98,42 +98,40 @@ export default function AboutMe() {
                 I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
               </p>
             </div>
-                <div className="flex items-center justify-start w-full ml-auto gap-6">
-                                                                                                                                                       <a
-                     href="/portfolio/Elijah_Zhao_Resume.pdf"
-                     download
-                     className="flex items-center gap-0 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
-                   >
-                  <span className="font-medium">Resume</span>
-                     <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 -ml-2" />
-                  </a>
-                 <button
-                   onClick={() => window.open('https://www.linkedin.com/in/elijahzhao24/')}
-                   className="p-2"
-                 >
-                   <FiLinkedin
-                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
-                   />
-                 </button>
-                 <button 
-                   onClick={() => window.open('https://github.com/elijahzhao24')}
-                   className="p-2"
-                 >
-                   <FiGithub 
-                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
-                 </button>
-                 <button 
-                   onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}
-                   className="p-2"
-                 >
-                   { <FiMail 
-                     className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
-                 </button>  
-                
-              
+            <div className="flex items-center justify-start w-full ml-auto gap-6">
+              <a
+                href="/portfolio/Elijah_Zhao_Resume.pdf"
+                download
+                className="flex items-center gap-0 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
+              >
+                <span className="font-medium">Resume</span>
+                <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 -ml-2" />
+              </a>
+              <button
+                onClick={() => window.open('https://www.linkedin.com/in/elijahzhao24/')}
+                className="p-2"
+              >
+                <FiLinkedin
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
+                />
+              </button>
+              <button 
+                onClick={() => window.open('https://github.com/elijahzhao24')}
+                className="p-2"
+              >
+                <FiGithub 
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
+              </button>
+              <button 
+                onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}
+                className="p-2"
+              >
+                { <FiMail 
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
+              </button>  
             </div>
           </div>
-          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(150px,250px,20vw)] shadow-lg ml-8 overflow-hidden">
+          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(100px,17vw,250px)] shadow-lg overflow-hidden flex-shrink-0">
             <img
               src={profile}
               alt="Profile"
