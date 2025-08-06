@@ -44,7 +44,7 @@ export default function Projects() {
         scrollTrigger: {
           trigger: headerRef.current,
           start: 'top 90%',
-          end: 'top 60%',
+          end: 'top 85%',
           toggleActions: 'play none none reverse',
         },
       }
@@ -62,8 +62,8 @@ export default function Projects() {
         stagger: 0.2,
         scrollTrigger: {
           trigger: projectsRef.current[0]?.parentNode,
-          start: 'top 90%',
-          end: 'top 60%',
+          start: 'top 85%',
+          end: 'top 80%',
           toggleActions: 'play none none reverse',
         },
         delay: 0.2 // slight delay after header

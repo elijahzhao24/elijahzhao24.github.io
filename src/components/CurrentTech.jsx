@@ -41,11 +41,11 @@ export default function CurrentTech() {
         x: 0,
         duration: 1,
         ease: 'power3.out',
-        stagger: 0.15,
+        stagger: 0.12,
         scrollTrigger: {
           trigger: headingRef.current,
           start: 'top 90%',
-          end: 'top 60%',
+          end: 'top 85%',
           toggleActions: 'play resume resume reverse',
         },
       }

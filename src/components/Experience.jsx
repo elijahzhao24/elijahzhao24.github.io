@@ -26,7 +26,7 @@ const Experience = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 90%',
-          end: 'top 60%',
+          end: 'top 80%',
           toggleActions: 'play none none reverse',
         },
       }
@@ -79,7 +79,7 @@ function WorkPanel() {
         scrollTrigger: {
           trigger: workItemRef.current,
           start: 'top 90%',
-          end: 'top 60%',
+          end: 'top 80%',
           toggleActions: 'play none none reverse',
         },
       }
@@ -92,15 +92,6 @@ function WorkPanel() {
 
   return (
     <div className="relative border rounded-md border-[#333333] pt-2 pl-2 pr-2">
-      {/* Vertical line */}
-      <div
-        className="absolute top-0 bottom-0 left-[6vw] lg:left-[32px] md:left-[32px] sm:left-[5vw]"
-        style={{
-          width: '1.5px',
-          background: '#333333',
-          zIndex: 0,
-        }}
-      />
       <div ref={workItemRef} style={{ opacity: 0 }} className="text-white text-xl font-semibold relative z-10">
         <ExperienceItem
           image={WoohelpLogo}
@@ -133,7 +124,7 @@ function EducationPanel() {
         scrollTrigger: {
           trigger: educationItemRef.current,
           start: 'top 90%',
-          end: 'top 60%',
+          end: 'top 80%',
           toggleActions: 'play none none reverse',
         },
       }

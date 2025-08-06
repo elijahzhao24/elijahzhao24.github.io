@@ -45,8 +45,8 @@ export default function AboutMe() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: contentRef.current,
-          start: 'top 80%',
-          end: 'top 73%',
+          start: 'top 90%',
+          end: 'top 85%',
           toggleActions: 'play none none reverse',
         },
         delay: 0.2
@@ -64,8 +64,8 @@ export default function AboutMe() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: imageRef.current,
-          start: 'top 80%',
-          end: 'top 73%',
+          start: 'top 90%',
+          end: 'top 85%',
           toggleActions: 'play none none reverse',
         },
         delay: 0.4
@@ -80,11 +80,10 @@ export default function AboutMe() {
 
   return (
     <div ref={aboutRef} className="AboutMe
-       flex justify-center items-center
-       min-h-[50vh]
-       px-4 sm:px-6 md:px-8" 
+       w-full flex justify-center items-center
+       min-h-[50vh]" 
     >
-      <div className="max-w-6xl mx-auto px-9 py-8">
+      <div className="mx-auto lg:w-[1000px] md:w-[800px] w-[95vw] px-4 sm:px-6 md:px-8">
         <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
           hi elijah here
           <span className="text-yellow-400 text-5xl">👋</span>
