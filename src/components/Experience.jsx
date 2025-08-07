@@ -14,32 +14,64 @@ const Experience = () => {
   const panelRef = useRef(null);
 
   useEffect(() => {
-    // Animate the main container
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 90%',
-          end: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            trigger.vars.trigger === containerRef.current) {
+          trigger.kill();
+        }
+      });
+    };
 
-    ScrollTrigger.refresh();
+    // Initial cleanup
+    cleanup();
+
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!containerRef.current) {
+        return;
+      }
+
+      // Set initial states
+      gsap.set(containerRef.current, { opacity: 0, y: 50 });
+
+      // Animate the main container
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 90%',
+            end: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
   return (
-    <div ref={containerRef} style={{ opacity: 0 }} className='w-full flex flex-col items-center justify-center mt-[10vh]'>
+    <div ref={containerRef} className='w-full flex flex-col items-center justify-center mt-[10vh]'>
       <div ref={tabButtonsRef} className="flex bg-[#242730] rounded-lg p-1 max-w-full  border-[#2d3644] lg:w-[900px] md:w-[700px] w-[80vw]">
         <button
           onClick={() => setActiveTab('work')}
@@ -68,31 +100,65 @@ function WorkPanel() {
   const workItemRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      workItemRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: workItemRef.current,
-          start: 'top 90%',
-          end: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            trigger.vars.trigger === workItemRef.current) {
+          trigger.kill();
+        }
+      });
+    };
+
+    // Initial cleanup
+    cleanup();
+
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!workItemRef.current) {
+        return;
       }
-    );
+
+      // Set initial states
+      gsap.set(workItemRef.current, { opacity: 0, y: 30 });
+
+      // Animate the work item
+      gsap.fromTo(
+        workItemRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: workItemRef.current,
+            start: 'top 90%',
+            end: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
   return (
     <div className="relative border rounded-md border-[#333333] pt-2 pl-2 pr-2">
-      <div ref={workItemRef} style={{ opacity: 0 }} className="text-white text-xl font-semibold relative z-10">
+      <div ref={workItemRef} className="text-white text-xl font-semibold relative z-10">
         <ExperienceItem
           image={WoohelpLogo}
           name="Woohelps International Technology LTD"
@@ -113,31 +179,65 @@ function EducationPanel() {
   const educationItemRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      educationItemRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: educationItemRef.current,
-          start: 'top 90%',
-          end: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            trigger.vars.trigger === educationItemRef.current) {
+          trigger.kill();
+        }
+      });
+    };
+
+    // Initial cleanup
+    cleanup();
+
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!educationItemRef.current) {
+        return;
       }
-    );
+
+      // Set initial states
+      gsap.set(educationItemRef.current, { opacity: 0, y: 30 });
+
+      // Animate the education item
+      gsap.fromTo(
+        educationItemRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: educationItemRef.current,
+            start: 'top 90%',
+            end: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
   return (
     <div className=' border rounded-md border-[#333333] pt-2 pl-2 pr-2'>
-      <div ref={educationItemRef} style={{ opacity: 0 }} className='text-white text-xl font-semibold'>
+      <div ref={educationItemRef} className='text-white text-xl font-semibold'>
         <ExperienceItem
           image={UBCLogo}
           name="University of British Columbia"

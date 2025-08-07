@@ -12,6 +12,7 @@ export default function Projects() {
   const navigate = useNavigate();
   const headerRef = useRef(null);
   const projectsRef = useRef([]);
+  const containerRef = useRef(null);
   
   const featuredProjects = [
     {
@@ -32,47 +33,83 @@ export default function Projects() {
   ];
 
   useEffect(() => {
-    // Animate header (title and view more button)
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 90%',
-          end: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            (trigger.vars.trigger === headerRef.current || 
+             trigger.vars.trigger === containerRef.current)) {
+          trigger.kill();
+        }
+      });
+    };
 
-    // Animate project widgets
-    gsap.fromTo(
-      projectsRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: projectsRef.current[0]?.parentNode,
-          start: 'top 85%',
-          end: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-        delay: 0.2 // slight delay after header
-      }
-    );
+    // Initial cleanup
+    cleanup();
 
-    ScrollTrigger.refresh();
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!headerRef.current || !containerRef.current) {
+        return;
+      }
+
+      // Set initial states
+      gsap.set(headerRef.current, { opacity: 0, y: 50 });
+      projectsRef.current.forEach(ref => {
+        if (ref) gsap.set(ref, { opacity: 0, y: 50 });
+      });
+
+      // Animate header
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 90%',
+            end: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Animate project widgets
+      gsap.fromTo(
+        projectsRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 85%',
+            end: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          delay: 0.2
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
@@ -89,9 +126,9 @@ export default function Projects() {
       padding: '0',
       marginTop: '12px'
     }}>
-      <div className="mx-auto lg:w-[900px] md:w-[700px] w-[80vw]">
+      <div ref={containerRef} className="mx-auto lg:w-[900px] md:w-[700px] w-[80vw]">
         {/* Header with title and view more button */}
-        <div ref={headerRef} style={{ opacity: 0 }} className="flex justify-between items-center mb-4">
+        <div ref={headerRef} className="flex justify-between items-center mb-4">
           <h1 className="text-3xl font-bold text-white mb-2 min-[430px]:text-4xl md:text-5xl">
             Featured Projects
           </h1>
@@ -108,7 +145,6 @@ export default function Projects() {
             <div
               key={index}
               ref={el => projectsRef.current[index] = el}
-              style={{ opacity: 0 }}
             >
               <ProjectWidget
                 title={project.title}

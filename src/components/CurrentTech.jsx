@@ -30,48 +30,87 @@ export default function CurrentTech() {
   const descRef = useRef(null);
 
   useEffect(() => {
-    // Animate heading and description
-    gsap.fromTo([
-      headingRef.current,
-      descRef.current
-    ],
-      { opacity: 0, x: -100 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top 90%',
-          end: 'top 85%',
-          toggleActions: 'play resume resume reverse',
-        },
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            (trigger.vars.trigger === headingRef.current || 
+             trigger.vars.trigger === descRef.current ||
+             trigger.vars.trigger === widgetsRef.current[0]?.parentNode)) {
+          trigger.kill();
+        }
+      });
+    };
+
+    // Initial cleanup
+    cleanup();
+
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!headingRef.current || !descRef.current || !widgetsRef.current[0]) {
+        return;
       }
-    );
-    // Animate grid items
-    gsap.fromTo(
-      widgetsRef.current,
-      { opacity: 0, x: -100 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: widgetsRef.current[0]?.parentNode,
-          start: 'top 90%',
-          end: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
-        delay: 0.2 // slight delay after heading/desc
-      }
-    );
-    ScrollTrigger.refresh();
+
+      // Set initial states
+      gsap.set([headingRef.current, descRef.current], { opacity: 0, x: -100 });
+      widgetsRef.current.forEach(ref => {
+        if (ref) gsap.set(ref, { opacity: 0, x: -100 });
+      });
+
+      // Animate heading and description
+      gsap.fromTo([
+        headingRef.current,
+        descRef.current
+      ],
+        { opacity: 0, x: -100 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 90%',
+            end: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Animate grid items
+      gsap.fromTo(
+        widgetsRef.current,
+        { opacity: 0, x: -100 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: widgetsRef.current[0]?.parentNode,
+            start: 'top 90%',
+            end: 'top 60%',
+            toggleActions: 'play none none reverse',
+          },
+          delay: 0.2 // slight delay after heading/desc
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
@@ -85,10 +124,10 @@ export default function CurrentTech() {
       marginTop: '10vh',
     }}>
       <div className="container mx-auto px-8 w-full">
-        <h1 ref={headingRef} style={{ opacity: 0 }} className="text-3xl font-bold text-white mb-2 min-[430px]:text-4xl md:text-5xl flex items-center gap-2 justify-start">
+        <h1 ref={headingRef} className="text-3xl font-bold text-white mb-2 min-[430px]:text-4xl md:text-5xl flex items-center gap-2 justify-start">
           Current Technologies  
         </h1>     
-        <div ref={descRef} style={{ opacity: 0, fontSize: "0.9rem", color: '#999' }} className="max-w-full pb-4 "
+        <div ref={descRef} style={{ fontSize: "0.9rem", color: '#999' }} className="max-w-full pb-4 "
         >
           I'm proficient in a range of technologies. These are some of my main technologies
         </div>
@@ -97,7 +136,6 @@ export default function CurrentTech() {
             <div
               key={i}
               ref={el => widgetsRef.current[i] = el}
-              style={{ opacity: 0 }}
             >
               <TechWidget {...props} />
             </div>

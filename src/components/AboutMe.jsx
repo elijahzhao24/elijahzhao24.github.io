@@ -16,65 +16,101 @@ export default function AboutMe() {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    // Animate the heading
-    gsap.fromTo(
-      headingRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top 80%',
-          end: 'top 73%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
+    // Clean up any existing ScrollTriggers for this component
+    const cleanup = () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger && 
+            (trigger.vars.trigger === headingRef.current || 
+             trigger.vars.trigger === contentRef.current ||
+             trigger.vars.trigger === imageRef.current)) {
+          trigger.kill();
+        }
+      });
+    };
 
-    // Animate the content (text and buttons)
-    gsap.fromTo(
-      contentRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: 'top 90%',
-          end: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        delay: 0.2
-      }
-    );
+    // Initial cleanup
+    cleanup();
 
-    // Animate the profile image
-    gsap.fromTo(
-      imageRef.current,
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: 'top 90%',
-          end: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        delay: 0.4
+    // Wait for DOM to be ready and elements to be positioned
+    const initAnimations = () => {
+      // Ensure elements exist and are properly positioned
+      if (!headingRef.current || !contentRef.current || !imageRef.current) {
+        return;
       }
-    );
 
-    ScrollTrigger.refresh();
+      // Set initial states
+      gsap.set(headingRef.current, { opacity: 0, y: 50 });
+      gsap.set(contentRef.current, { opacity: 0, y: 30 });
+      gsap.set(imageRef.current, { opacity: 0, scale: 0.8 });
+
+      // Animate the heading
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 80%',
+            end: 'top 73%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Animate the content (text and buttons)
+      gsap.fromTo(
+        contentRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 90%',
+            end: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          delay: 0.2
+        }
+      );
+
+      // Animate the profile image
+      gsap.fromTo(
+        imageRef.current,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: 'top 90%',
+            end: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          delay: 0.4
+        }
+      );
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    };
+
+    // Use a more reliable timing approach
+    const timer = setTimeout(() => {
+      requestAnimationFrame(initAnimations);
+    }, 50);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      cleanup();
     };
   }, []);
 
@@ -84,12 +120,12 @@ export default function AboutMe() {
        min-h-[50vh]" 
     >
        <div className="mx-auto w-[95vw] lg:w-[69vw] md:w-[80vw] px-4 sm:px-6 md:px-8">
-          <h1 ref={headingRef} style={{ opacity: 0 }} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
+          <h1 ref={headingRef} className="text-5xl font-bold font-serif text-white mb-6 flex items-center gap-2">
             hi elijah here
             <span className="text-yellow-400 text-5xl">👋</span>
           </h1>
             <div className="flex items-start gap-4 md:gap-6 lg:gap-8">
-               <div ref={contentRef} style={{ opacity: 0 }} className="fluid-space-y flex-1">
+               <div ref={contentRef} className="fluid-space-y flex-1">
             <div className="space-y-5">
               <p className="AboutMe-text">
                 I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
@@ -131,7 +167,7 @@ export default function AboutMe() {
               </button>  
             </div>
           </div>
-          <div ref={imageRef} style={{ opacity: 0 }} className="aspect-[4/5] w-[clamp(100px,17vw,250px)] shadow-lg overflow-hidden flex-shrink-0">
+          <div ref={imageRef} className="aspect-[4/5] w-[clamp(100px,17vw,250px)] shadow-lg overflow-hidden flex-shrink-0">
             <img
               src={profile}
               alt="Profile"
