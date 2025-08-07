@@ -136,7 +136,7 @@ export default function AboutMe() {
             </div>
             <div className="flex items-center justify-start w-full ml-auto gap-6">
               <a
-                href="/portfolio/Elijah_Zhao_Resume.pdf"
+                href="/Elijah_Zhao_Resume.pdf"
                 download
                 className="flex items-center gap-0 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
               >

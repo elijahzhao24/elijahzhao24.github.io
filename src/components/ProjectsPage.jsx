@@ -21,8 +21,8 @@ export default function ProjectsPage() {
         description: "Simple protfolio to showcase relevant projects, expeirences, and skills",
         image: Portdemo, 
         technologies: ["React", "TailwindCSS", "GSAP"],
-        websiteLink: "https://elijahzhao24.github.io/portfolio/",
-        sourceLink: "https://github.com/elijahzhao24/portfolio",
+        websiteLink: "https://elijahzhao24.github.io/",
+        sourceLink: "https://github.com/elijahzhao24/elijahzhao24.github.io",
       },
       {
         title: "Connect Four AI",
