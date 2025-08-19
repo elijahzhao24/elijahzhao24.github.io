@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ProjectWidget from "./ProjectWidget";
+import lecruiter from '../assets/lecruiter.png';
 import Portdemo from '../assets/portdemo.png';
 import Connectfourdemo from '../assets/connectfourdemo.png';
 import suddemo from '../assets/suddemo.gif';
@@ -23,6 +24,13 @@ export default function ProjectsPage() {
         technologies: ["React", "TailwindCSS", "GSAP"],
         websiteLink: "https://elijahzhao24.github.io/",
         sourceLink: "https://github.com/elijahzhao24/elijahzhao24.github.io",
+      },
+      {
+        title: "Lecruiter AI",
+        description: "AI-powered platform enabling users to practice both behavioral and technical interviews, delivering generative prompts, realistic feedback, and automated scoring",
+        image: lecruiter, 
+        technologies: ["React", "TailwindCSS", "Python", "FastAPI", "AWS bedrock"],
+        sourceLink: "https://github.com/R0yZh3ng/CIC-GenAI-Hackathon"
       },
       {
         title: "Connect Four AI",

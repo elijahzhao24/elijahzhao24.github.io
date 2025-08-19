@@ -165,9 +165,9 @@ function WorkPanel() {
           date="May 2024 - Aug 2024"
           position="Software Development Engineering Intern"
           description={[
-            "Developed a full‑stack platform enabling users to seamlessly post, search, and browse apartment listings.",
-            "Built using React.js on the front end, Node.js/Express on the back end, and MySQL for robust data management.",
-            "Built an automated image upload and optimization pipeline with AWS S3 and integrating WeChat's API for secure user authentication and real‑time notifications."
+            "Developed a full-stack application for users to post and browse apartment listings, using React.js, Django, and PostgreSQL",
+            "Architected RESTful GET/POST APIs for Image and Listing uploads/retrieval",
+            "Integrated the WeChat API for OAuth authentication, enabling cross-platform login for target users."
           ]}
         />
       </div>

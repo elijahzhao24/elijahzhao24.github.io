@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import ProjectWidget from "./ProjectWidget";
 import Portdemo from '../assets/portdemo.png';
 import Connectfourdemo from '../assets/connectfourdemo.png';
+import lecruiter from '../assets/lecruiter.png';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,11 +25,11 @@ export default function Projects() {
       sourceLink: "https://github.com/elijahzhao24/portfolio",
     },
     {
-      title: "Connect Four AI",
-      description: "Connect Four AI opponent implemented using a Minimax algorithm with Alpha-beta pruning",
-      image: Connectfourdemo, 
-      technologies: ["Java", "Swing", "Junit"],
-      sourceLink: "https://github.com/elijahzhao24/Connect-Four-AI"
+      title: "Lecruiter AI",
+      description: "AI-powered platform enabling users to practice both behavioral and technical interviews, delivering generative prompts, realistic feedback, and automated scoring",
+      image: lecruiter, 
+      technologies: ["React", "TailwindCSS", "Python", "FastAPI", "AWS bedrock"],
+      sourceLink: "https://github.com/R0yZh3ng/CIC-GenAI-Hackathon"
     }
   ];
 
