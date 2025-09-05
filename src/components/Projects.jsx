@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ProjectWidget from "./ProjectWidget";
-import Portdemo from '../assets/portdemo.png';
-import Connectfourdemo from '../assets/connectfourdemo.png';
+import NBAsalary from '../assets/NBAsalary.png';
 import lecruiter from '../assets/lecruiter.png';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -17,12 +16,12 @@ export default function Projects() {
   
   const featuredProjects = [
     {
-      title: "Portfolio Website",
-      description: "Simple protfolio to showcase relevant projects, expeirences, and skills",
-      image: Portdemo, 
-      technologies: ["React", "TailwindCSS", "GSAP"],
-      websiteLink: "https://elijahzhao24.github.io/",
-      sourceLink: "https://github.com/elijahzhao24/portfolio",
+      title: "NBAsalary",
+      description: "A Full stack CRUD application which graphically display the salary cap of each NBA team, with a user friendly interface and responsive design",
+      image: NBAsalary, 
+      technologies: ["Spring Boot", "JPA", "Java", "PostgreSQL", "Python", "psycopg2", "beautifulsoup", "React", "TailwindCSS"],
+      websiteLink: "https://nbasalary.vercel.app/",
+      sourceLink: "https://github.com/elijahzhao24/NBAsalary",
     },
     {
       title: "Lecruiter AI",
@@ -130,12 +129,12 @@ export default function Projects() {
       <div ref={containerRef} className="mx-auto lg:w-[900px] md:w-[700px] w-[80vw]">
         {/* Header with title and view more button */}
         <div ref={headerRef} className="flex justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-white mb-2 min-[430px]:text-4xl md:text-5xl">
+          <h1 className="text-3xl font-bold text-white mb-2 min-[430px]:text-6xl md:text-5xl ">
             Featured Projects
           </h1>
           <button
             onClick={handleViewMore}
-            className="text-[#cccccc] hover:text-[#ffffff] transition-colors duration-200"
+            className="text-[#cccccc] hover:text-[#ffffff] transition-colors duration-200 px-4 py-2 border border-gray-500 rounded-md"
           >
             View More
           </button>

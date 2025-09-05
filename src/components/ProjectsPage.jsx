@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ProjectWidget from "./ProjectWidget";
 import lecruiter from '../assets/lecruiter.png';
+import NBAsalary from '../assets/NBAsalary.png';
 import Portdemo from '../assets/portdemo.png';
 import Connectfourdemo from '../assets/connectfourdemo.png';
 import suddemo from '../assets/suddemo.gif';
@@ -17,13 +18,13 @@ export default function ProjectsPage() {
 
   // Placeholder data for 5 projects
   const allProjects = [
-    {
-        title: "Portfolio Website",
-        description: "Simple protfolio to showcase relevant projects, expeirences, and skills",
-        image: Portdemo, 
-        technologies: ["React", "TailwindCSS", "GSAP"],
-        websiteLink: "https://elijahzhao24.github.io/",
-        sourceLink: "https://github.com/elijahzhao24/elijahzhao24.github.io",
+      {
+        title: "NBAsalary",
+        description: "A Full stack CRUD application which graphically display the salary cap of each NBA team, with a user friendly interface and responsive design",
+        image: NBAsalary, 
+        technologies: ["Spring Boot", "JPA", "Java", "PostgreSQL", "Python", "psycopg2", "beautifulsoup", "React", "TailwindCSS"],
+        websiteLink: "https://nbasalary.vercel.app/",
+        sourceLink: "https://github.com/elijahzhao24/NBAsalary",
       },
       {
         title: "Lecruiter AI",
@@ -31,6 +32,14 @@ export default function ProjectsPage() {
         image: lecruiter, 
         technologies: ["React", "TailwindCSS", "Python", "FastAPI", "AWS bedrock"],
         sourceLink: "https://github.com/R0yZh3ng/CIC-GenAI-Hackathon"
+      },
+      {
+        title: "Portfolio Website",
+        description: "Simple protfolio to showcase relevant projects, expeirences, and skills",
+        image: Portdemo, 
+        technologies: ["React", "TailwindCSS", "GSAP"],
+        websiteLink: "https://elijahzhao24.github.io/",
+        sourceLink: "https://github.com/elijahzhao24/elijahzhao24.github.io",
       },
       {
         title: "Connect Four AI",

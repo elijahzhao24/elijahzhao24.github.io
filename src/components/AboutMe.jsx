@@ -131,7 +131,7 @@ export default function AboutMe() {
                 I am a second year computer science student at the University of British Columbia. My interests currently lie in software development and machine learning. I also like to golf and practice piano in my free time.
               </p>
               <p className="AboutMe-text">
-                I am currently building a fullstack NBA parley prediction platform, using React, Spring Boot, and PostgreSQL.
+                I am currently building a machine learning model to predict the outcome of NBA games using a gradient boosting classifier.
               </p>
             </div>
             <div className="flex items-center justify-start w-full ml-auto gap-6">
