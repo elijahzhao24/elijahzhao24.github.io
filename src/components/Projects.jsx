@@ -17,7 +17,7 @@ export default function Projects() {
   const featuredProjects = [
     {
       title: "NBAsalary",
-      description: "A Full stack CRUD application which graphically display the salary cap of each NBA team, with a user friendly interface and responsive design",
+      description: "A Full stack NBA tracking app which graphically displays the salary cap of each NBA team; updated automatically throughout the season through web scraping",
       image: NBAsalary, 
       technologies: ["Spring Boot", "JPA", "Java", "PostgreSQL", "Python", "psycopg2", "beautifulsoup", "React", "TailwindCSS"],
       websiteLink: "https://nbasalary.vercel.app/",
