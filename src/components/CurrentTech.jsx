@@ -7,7 +7,8 @@ import cppLogo from '../assets/cpplogo.png'
 import pythonLogo from '../assets/python.svg'
 import tailwindLogo from '../assets/tailwind.svg'
 import gitLogo from '../assets/git.svg'
-import figmaLogo from '../assets/figma.svg'
+import postgresLogo from '../assets/postgresql-icon.svg'
+import nodeJsLogo from '../assets/nodejs-icon.svg'
 import javaLogo from '../assets/java.svg'
 import springbootLogo from '../assets/Springboot.svg.png'
 
@@ -17,9 +18,9 @@ const techWidgets = [
   { logo: reactLogo, bgcolor: "#61DAFB", name: "React", description: "JavaScript Library" },
   { logo: cppLogo, bgcolor: "#3178C6", name: "C++", description: "Low-Level OOP" },
   { logo: pythonLogo, bgcolor: "#f8cf78", name: "Python", description: "Programing language" },
-  { logo: tailwindLogo, bgcolor: "#148df4", name: "Tailwind", description: "CSS framework" },
+  { logo: postgresLogo, bgcolor: "#148df4", name: "PostgresSQL", description: "SQL database" },
   { logo: gitLogo, bgcolor: "#faa053", name: "Git", description: "Version control" },
-  { logo: figmaLogo, bgcolor: "#1aad09", name: "Figma", description: "Design Tool" },
+  { logo: nodeJsLogo, bgcolor: "#1aad09", name: "Node.js", description: "JavaScript runtime" },
   { logo: javaLogo, bgcolor: "#5097d5", name: "Java", description: "Programing language" },
   { logo: springbootLogo, bgcolor: "#5cd44f", name: "Spring Boot", description: "Java framework" },
 ];

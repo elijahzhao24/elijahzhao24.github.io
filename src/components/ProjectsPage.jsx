@@ -35,7 +35,7 @@ export default function ProjectsPage() {
       },
       {
         title: "Portfolio Website",
-        description: "Simple protfolio to showcase relevant projects, expeirences, and skills",
+        description: "Simple portfolio to showcase relevant projects, experiences, and skills",
         image: Portdemo, 
         technologies: ["React", "TailwindCSS", "GSAP"],
         websiteLink: "https://elijahzhao24.github.io/",
