@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import reactLogo from '../assets/react.svg';
 import cppLogo from '../assets/cpplogo.png'
 import pythonLogo from '../assets/python.svg'
-import tailwindLogo from '../assets/tailwind.svg'
+import awsLogo from '../assets/awslogo.png'
 import gitLogo from '../assets/git.svg'
 import postgresLogo from '../assets/postgresql-icon.svg'
 import nodeJsLogo from '../assets/nodejs-icon.svg'
@@ -21,7 +21,7 @@ const techWidgets = [
   { logo: postgresLogo, bgcolor: "#148df4", name: "PostgresSQL", description: "SQL database" },
   { logo: gitLogo, bgcolor: "#faa053", name: "Git", description: "Version control" },
   { logo: nodeJsLogo, bgcolor: "#1aad09", name: "Node.js", description: "JavaScript runtime" },
-  { logo: javaLogo, bgcolor: "#5097d5", name: "Java", description: "Programing language" },
+  { logo: awsLogo, bgcolor: "#faa053", name: "AWS", description: "Cloud Service" },
   { logo: springbootLogo, bgcolor: "#5cd44f", name: "Spring Boot", description: "Java framework" },
 ];
 
