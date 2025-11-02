@@ -134,11 +134,11 @@ export default function AboutMe() {
                 I am currently building a machine learning model to predict the outcome of NBA games using a gradient boosting classifier.
               </p>
             </div>
-            <div className="flex items-center justify-start w-full ml-auto gap-6">
+            <div className="flex items-center justify-start w-full ml-auto gap-0 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-8">
               <a
                 href="/elijahzhaoresume.pdf"
                 download
-                className="flex items-center gap-0 border border-gray-500 rounded-md px-4 py-2 text-gray-300 hover:text-white hover:border-white transition"
+                className="flex items-center gap-3 border border-gray-500 rounded-md px-2 py-1 sm:py-2 sm:px-4 text-gray-300 hover:text-white hover:border-white transition"
               >
                 <span className="font-medium">Resume</span>
                 <HiOutlineArrowDownTray className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 -ml-2" />
@@ -148,7 +148,7 @@ export default function AboutMe() {
                 className="p-2"
               >
                 <FiLinkedin
-                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"
                 />
               </button>
               <button 
@@ -156,14 +156,14 @@ export default function AboutMe() {
                 className="p-2"
               >
                 <FiGithub 
-                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/>
               </button>
               <button 
                 onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elijahzhao24@gmail.com&su=Hello&body=I would like to connect!')}
                 className="p-2"
               >
                 { <FiMail 
-                  className="text-[#bbbbbb] hover:text-white transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
+                  className="text-[#bbbbbb] hover:text-white transition-colors w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10"/> }
               </button>  
             </div>
           </div>

@@ -52,7 +52,7 @@ const PortfolioContent = forwardRef((props, ref) => (
       overflowWrap: 'break-word',
       lineHeight: 1,
     }}>
-      Hi, I'm Elijah Zhao. I create intutive visually appealing and highly functional applications.
+      Hey! I'm Elijah, a developer with a curiousity for human-computer interaction 
     </div>
   </div>
 ));

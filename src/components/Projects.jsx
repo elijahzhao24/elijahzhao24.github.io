@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ProjectWidget from "./ProjectWidget";
 import NBAsalary from '../assets/NBAsalary.png';
+import RememberMe from '../assets/RememberMe.png';
 import lecruiter from '../assets/lecruiter.png';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -24,11 +25,12 @@ export default function Projects() {
       sourceLink: "https://github.com/elijahzhao24/NBAsalary",
     },
     {
-      title: "Lecruiter AI",
-      description: "AI-powered platform enabling users to practice both behavioral and technical interviews, delivering generative prompts, realistic feedback, and automated scoring",
-      image: lecruiter, 
-      technologies: ["React", "TailwindCSS", "Python", "FastAPI", "AWS bedrock"],
-      sourceLink: "https://github.com/R0yZh3ng/CIC-GenAI-Hackathon"
+      title: "Remember Me",
+      description: "an assistive camera companion that uses computer vision to recognize familiar faces and announce names, relationships, and reminders, helping Alzheimer's patients stay connected with those around them.",
+      image: RememberMe, 
+      technologies: ["React Native", "TailwindCSS", "Python", "Flask", "DynamoDB", "AWS S3", "AWS Rekognition"],
+      websiteLink: "https://devpost.com/software/remember-me-e6pyuv",
+      sourceLink: "https://github.com/LeCruitUsPls/AlzheimerCamera",
     }
   ];
 

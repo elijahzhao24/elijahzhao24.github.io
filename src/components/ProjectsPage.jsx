@@ -4,6 +4,7 @@ import lecruiter from '../assets/lecruiter.png';
 import NBAsalary from '../assets/NBAsalary.png';
 import Portdemo from '../assets/portdemo.png';
 import Connectfourdemo from '../assets/connectfourdemo.png';
+import RememberMe from '../assets/RememberMe.png';
 import suddemo from '../assets/suddemo.gif';
 import PVZdemo from '../assets/pvzdemo.png';
 import balldemo from '../assets/balldemo.gif';
@@ -25,6 +26,14 @@ export default function ProjectsPage() {
         technologies: ["Spring Boot", "JPA", "Java", "PostgreSQL", "Python", "psycopg2", "beautifulsoup", "React", "TailwindCSS"],
         websiteLink: "https://nbasalary.vercel.app/",
         sourceLink: "https://github.com/elijahzhao24/NBAsalary",
+      },
+      {
+        title: "Remember Me",
+        description: "an assistive camera companion that uses computer vision to recognize familiar faces and announce names, relationships, and reminders, helping Alzheimer's patients stay connected with those around them.",
+        image: RememberMe, 
+        technologies: ["React Native", "TailwindCSS", "Python", "Flask", "DynamoDB", "AWS S3", "AWS Rekognition"],
+        websiteLink: "https://devpost.com/software/remember-me-e6pyuv",
+        sourceLink: "https://github.com/LeCruitUsPls/AlzheimerCamera",
       },
       {
         title: "Lecruiter AI",
