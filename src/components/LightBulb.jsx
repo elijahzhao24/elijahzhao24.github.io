@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import PortfolioContent from './PortfolioContent';
@@ -12,42 +12,110 @@ export default function LightBulb() {
   const bulbRef = useRef(null);
   const wireRef = useRef(null);
   const portfolioRef = useRef(null);
+  const handleWrapperRef = useRef(null);
+  const draggableInstance = useRef(null);
   const location = useLocation();
 
-  // Simple fix: ensure light is on when navigating to homepage from other pages
   useEffect(() => {
-    // Only run this when navigating to homepage (not on initial load)
-    if (location.pathname === '/') {
-      // Small delay to ensure DOM is ready
-      setTimeout(() => {
-        // If body has 'on' class, ensure all elements are positioned correctly
-        if (document.body.classList.contains('on')) {
-          gsap.set('.bulb', { y: '-15vh' });
-          gsap.set(wireRef.current, { y: '-15vh' });
-          gsap.set('.idea-text', { opacity: 0, filter: "blur(6px)" });
-          gsap.set(portfolioRef.current, { opacity: 1 });
-          gsap.set(dragRef.current, { y: -window.innerHeight * 0.3, x: 0 });
-          gsap.set(lineRef.current, {
-            attr: { x2: 20, y2: window.innerHeight * 0.1 }
-          });
-        }
-      }, 100);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!dragRef.current) return;
-
-    const getOffsetY = () => (document.body.classList.contains('on') ? -window.innerHeight * 0.3 : 0);
-
-    const updateLine = (x, y) => {
-      const offsetY = getOffsetY();
-      gsap.set(lineRef.current, {
-        attr: { x2: 20 + x, y2: window.innerHeight * 0.40 + y + offsetY }
-      });
+    const resetOnUnload = () => {
+      sessionStorage.removeItem('lampState');
     };
 
-    Draggable.create(dragRef.current, {
+    window.addEventListener('beforeunload', resetOnUnload);
+    return () => window.removeEventListener('beforeunload', resetOnUnload);
+  }, []);
+
+  const syncLineToHandle = useCallback(() => {
+    if (!stringRef.current || !lineRef.current || !dragRef.current) return;
+
+    const stringBox = stringRef.current.getBoundingClientRect();
+    const handleBox = dragRef.current.getBoundingClientRect();
+
+    if (!stringBox || !handleBox || (stringBox.width === 0 && stringBox.height === 0)) {
+      return;
+    }
+
+    const attachX = handleBox.left + handleBox.width / 2 - stringBox.left;
+    const attachY = handleBox.top + handleBox.height / 2 - stringBox.top;
+
+    gsap.set(lineRef.current, {
+      attr: {
+        x2: attachX,
+        y2: attachY
+      }
+    });
+  }, []);
+
+  const finalizeSync = useCallback(() => {
+    syncLineToHandle();
+    draggableInstance.current?.update?.();
+  }, [syncLineToHandle]);
+
+  const updateBounds = useCallback(() => {
+    if (!draggableInstance.current) return;
+    const isOn = document.body.classList.contains('on');
+    const bounds = {
+      minY: isOn ? -window.innerHeight * 0.4 : 0,
+      maxY: window.innerHeight * 0.75,
+    };
+
+    draggableInstance.current.vars.bounds = bounds;
+    draggableInstance.current.applyBounds(bounds);
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+
+    const applyOffState = () => {
+      document.body.classList.remove('on');
+      gsap.set('.bulb', { y: '0' });
+      gsap.set(wireRef.current, { y: '0' });
+      gsap.set('.idea-text', { opacity: 1, filter: "blur(0px)" });
+      if (portfolioRef.current) {
+        gsap.set(portfolioRef.current, { opacity: 0 });
+      }
+      if (handleWrapperRef.current) {
+        gsap.set(handleWrapperRef.current, { y: 0 });
+      }
+      if (dragRef.current) {
+        gsap.set(dragRef.current, { y: 0, x: 0 });
+      }
+      sessionStorage.setItem('lampState', 'off');
+      updateBounds();
+      requestAnimationFrame(() => finalizeSync());
+    };
+
+    const applyOnState = () => {
+      document.body.classList.add('on');
+      gsap.set('.bulb', { y: '-15vh' });
+      gsap.set(wireRef.current, { y: '-15vh' });
+      gsap.set('.idea-text', { opacity: 0, filter: "blur(6px)" });
+      if (portfolioRef.current) {
+        gsap.set(portfolioRef.current, { opacity: 1 });
+      }
+      if (handleWrapperRef.current) {
+        gsap.set(handleWrapperRef.current, { y: -window.innerHeight * 0.3 });
+      }
+      if (dragRef.current) {
+        gsap.set(dragRef.current, { y: 0, x: 0 });
+      }
+      sessionStorage.setItem('lampState', 'on');
+      updateBounds();
+      requestAnimationFrame(() => finalizeSync());
+    };
+
+    const storedState = sessionStorage.getItem('lampState');
+
+    if (storedState === 'on') {
+      requestAnimationFrame(() => applyOnState());
+    } else {
+      applyOffState();
+    }
+  }, [finalizeSync, location.pathname, updateBounds]);
+
+  useLayoutEffect(() => {
+    if (!dragRef.current || !handleWrapperRef.current) return;
+    const [draggable] = Draggable.create(dragRef.current, {
       type: 'x,y',
       bounds: {
         minY: document.body.classList.contains('on')
@@ -58,17 +126,18 @@ export default function LightBulb() {
       inertia: true,
 
       onPress() {
-        gsap.set(this.target, { x: this.x, y: this.y + getOffsetY() });
-        updateLine(this.x, this.y);
+        this.update();
+        syncLineToHandle();
       },
 
       onDrag() {
-        gsap.set(this.target, { x: this.x, y: this.y + getOffsetY() });
-        updateLine(this.x, this.y);
+        syncLineToHandle();
       },
 
       onRelease() {
         document.body.classList.toggle('on');
+        sessionStorage.setItem('lampState', document.body.classList.contains('on') ? 'on' : 'off');
+        updateBounds();
 
         if (document.body.classList.contains('on')) {
           // Animate the lightbulb up
@@ -107,7 +176,8 @@ export default function LightBulb() {
             y: 0,
             x: 0,
             duration: 0.6,
-            ease: 'elastic.out(1, 0.5)'
+            ease: 'elastic.out(1, 0.5)',
+            onUpdate: syncLineToHandle
           });
 
           gsap.to(lineRef.current, {
@@ -116,15 +186,16 @@ export default function LightBulb() {
               y2: window.innerHeight * 0.40
             },
             duration: 0.6,
-            ease: 'elastic.out(1, 0.5)'
+            ease: 'elastic.out(1, 0.5)',
+            onUpdate: syncLineToHandle
           });
 
-          gsap.to(dragRef.current, {
+          gsap.to(handleWrapperRef.current, {
             y: -window.innerHeight * 0.3,
-            x: 0,
             duration: 0.6,
             ease: "power2.inOut",
-            delay: 0.3
+            delay: 0.3,
+            onUpdate: syncLineToHandle
           });
 
           gsap.to(lineRef.current, {
@@ -134,7 +205,8 @@ export default function LightBulb() {
             },
             ease: "power2.inOut",
             duration: 0.6,
-            delay: 0.3
+            delay: 0.3,
+            onUpdate: syncLineToHandle
           });
 
         } else {
@@ -171,10 +243,18 @@ export default function LightBulb() {
 
           // Snap back animation
           gsap.to(dragRef.current, {
-            y: -window.innerHeight * 0.3,
+            y: 0,
             x: 0,
             duration: 0.6,
-            ease: 'elastic.out(1, 0.5)'
+            ease: 'elastic.out(1, 0.5)',
+            onUpdate: syncLineToHandle
+          });
+
+          gsap.to(handleWrapperRef.current, {
+            y: -window.innerHeight * 0.3,
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.5)',
+            onUpdate: syncLineToHandle
           });
 
           gsap.to(lineRef.current, {
@@ -183,15 +263,16 @@ export default function LightBulb() {
               y2: window.innerHeight * 0.1
             },
             duration: 0.6,
-            ease: 'elastic.out(1, 0.5)'
+            ease: 'elastic.out(1, 0.5)',
+            onUpdate: syncLineToHandle
           });
 
-          gsap.to(dragRef.current, {
+          gsap.to(handleWrapperRef.current, {
             y: 0,
-            x: 0,
             duration: 0.6,
             ease: "power2.inOut",
-            delay: 0.3
+            delay: 0.3,
+            onUpdate: syncLineToHandle
           });
 
           gsap.to(lineRef.current, {
@@ -201,40 +282,41 @@ export default function LightBulb() {
             },
             ease: "power2.inOut",
             duration: 0.6,
-            delay: 0.3  
+            delay: 0.3,
+            onUpdate: syncLineToHandle
           });
         }
+
+        gsap.delayedCall(1, finalizeSync);
       },
     });
 
+    draggableInstance.current = draggable;
+    updateBounds();
+    finalizeSync();
+
     const handleResize = () => {
-      // Get the current x and y of the handle (from GSAP)
-      const x = gsap.getProperty(dragRef.current, "x") || 0;
-      const y = gsap.getProperty(dragRef.current, "y") || 0;
-      
-      // Update the string to match the handle's position and offset
+      if (!dragRef.current || !handleWrapperRef.current) return;
       const isOn = document.body.classList.contains('on');
-      const baseY = isOn ? window.innerHeight * 0.10 : window.innerHeight * 0.40;
-      
-      // Update handle position
-      gsap.set(dragRef.current, {
+
+      gsap.set(handleWrapperRef.current, {
         y: isOn ? -window.innerHeight * 0.3 : 0
       });
+      gsap.set(dragRef.current, { y: 0, x: 0 });
 
-      // Update line position
-      gsap.set(lineRef.current, {
-        attr: { 
-          x2: 20 + x, 
-          y2: baseY
-        }
-      });
+      updateBounds();
+      draggableInstance.current?.update?.();
+      finalizeSync();
     };
 
     window.addEventListener('resize', handleResize);
+    handleResize();
     return () => {
       window.removeEventListener('resize', handleResize);
+      draggableInstance.current = null;
+      draggable.kill();
     };
-  }, []);
+  }, [finalizeSync, syncLineToHandle, updateBounds]);
 
   return (
     <div className="light" style={{ position: 'relative', height: '100vh' }}>
@@ -273,30 +355,42 @@ export default function LightBulb() {
       </svg>
       {/* Draggable handle */}
       <div
-        ref={dragRef}
-        style={{  
+        ref={handleWrapperRef}
+        style={{
           position: 'absolute',
           left: 'calc(50% + 70px)',
           top: 'calc(40vh - 20px)',
           width: 40,
           height: 40,
           zIndex: 3,
-          cursor: 'grab',
+          pointerEvents: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          pointerEvents: 'auto'
         }}
       >
         <div
-          style={{
-            width: 16,
-            height: 16,
-            borderRadius: '50%',
-            background: '#D4AF37',
-            boxShadow: '0 2px 8px #0002',
+          ref={dragRef}
+          style={{  
+            width: 40,
+            height: 40,
+            cursor: 'grab',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'auto'
           }}
-        ></div>
+        >
+          <div
+            style={{
+              width: 16,
+              height: 16,
+              borderRadius: '50%',
+              background: '#D4AF37',
+              boxShadow: '0 2px 8px #0002',
+            }}
+          ></div>
+        </div>
       </div>
     </div>
   );

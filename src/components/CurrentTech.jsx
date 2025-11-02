@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import TechWidget from './TechWidget';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import reactLogo from '../assets/react.svg';
+import reactLogo from '../assets/React.svg';
 import cppLogo from '../assets/cpplogo.png'
 import pythonLogo from '../assets/python.svg'
 import awsLogo from '../assets/awslogo.png'
